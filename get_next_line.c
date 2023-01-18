@@ -6,7 +6,7 @@
 /*   By: gode-jes <gode-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:53:05 by gode-jes          #+#    #+#             */
-/*   Updated: 2023/01/11 13:11:13 by gode-jes         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:15:37 by gode-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,25 @@ char	*get_next_line(int fd)
 	char		stack[BUFFER_SIZE + 1];
 	char		*line;
 	int			flag;
+	int			i;
 
-	if (fd < 0 && BUFFER_SIZE < 1)
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
-	while (read(fd, stack, BUFFER_SIZE))
+	while (1)
 	{
+		i = read(fd, stack, BUFFER_SIZE);
 		stack[BUFFER_SIZE] = '\0';
-		/*printf("stack: %s/\n", stack);*/
+		/*printf("STACK: %s\n", stack);*/
 		str = ft_strjoin(str, stack);
-		line = (char *) malloc(ft_strlen(str) * sizeof(char));
-		if (line == 0)
-			return (NULL);
-		printf("str: %s/\n", str);
+		/*printf("STR: %s\n", str);*/
 		flag = update_str(str, &line);
-		printf("STR_U : %s\n", str);
-		if (flag)
+		/*printf("U_STR: %s\n", str);*/
+		if (flag || !i)
+		{
+			free(str);
 			break ;
+		}
 	}
 	printf("LINHA : %s", line);
 	return (line);
@@ -52,7 +54,7 @@ int	main(void)
 	get_next_line(fd);
 	get_next_line(fd);
 	get_next_line(fd);
-	/*get_next_line(fd);*/
+	get_next_line(fd);
 	close(fd);
 	return (0);
 }

@@ -1,4 +1,4 @@
-NAME = get_next_line
+NAME = get_next_line.a
 
 CC = gcc
 
@@ -22,7 +22,3 @@ fclean:	clean
 			$(RM) $(NAME)
 
 re:	fclean $(NAME)
-
-#so:
-#	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-#	gcc -nostartfiles -shared -o libft.so $(OBJ)
