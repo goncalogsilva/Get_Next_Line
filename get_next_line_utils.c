@@ -6,7 +6,7 @@
 /*   By: gode-jes <gode-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:58:47 by gode-jes          #+#    #+#             */
-/*   Updated: 2023/01/18 12:15:59 by gode-jes         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:25:21 by gode-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	ft_strlen(char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] != '\0' /*&& s[i] != '\n'*/)
+	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	if (s[i] == '\n')
 		i++;
@@ -60,27 +60,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strdup(char *s)
-{
-	char	*dup;
-	int		len;
-	int		i;
-
-	len = ft_strlen(s);
-	dup = (char *) malloc(len * sizeof(char) + 1);
-	if (dup == 0)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
-int	update_str(char *str, char **line)
+int	update_stack(char *str)
 {
 	int		i;
 	int		j;
@@ -90,8 +70,6 @@ int	update_str(char *str, char **line)
 		i++;
 	if (str[i] == '\n')
 	{
-		*line = ft_strdup(str);
-		(*line)[i + 1] = '\0';
 		j = i;
 		while (str[j] != '\0')
 		{

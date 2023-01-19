@@ -6,7 +6,7 @@
 /*   By: gode-jes <gode-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:53:05 by gode-jes          #+#    #+#             */
-/*   Updated: 2023/01/18 12:15:37 by gode-jes         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:28:59 by gode-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,22 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	char		stack[BUFFER_SIZE + 1];
+	static char	stack[BUFFER_SIZE + 1];
 	char		*line;
 	int			flag;
-	int			i;
 
 	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
-	while (1)
+	while (read(fd, stack, BUFFER_SIZE) > 0)
 	{
-		i = read(fd, stack, BUFFER_SIZE);
-		stack[BUFFER_SIZE] = '\0';
-		/*printf("STACK: %s\n", stack);*/
-		str = ft_strjoin(str, stack);
-		/*printf("STR: %s\n", str);*/
-		flag = update_str(str, &line);
-		/*printf("U_STR: %s\n", str);*/
-		if (flag || !i)
-		{
-			free(str);
+		printf("STACK: %s\n", stack);
+		line = ft_strjoin(line, stack);
+		printf("UPDATED_LINHA: %s\n", line);
+		flag = update_stack(stack);
+		printf("UPDATED_STACK: %s\n", stack);
+		if (flag)
 			break ;
-		}
 	}
 	printf("LINHA : %s", line);
 	return (line);
