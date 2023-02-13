@@ -6,7 +6,7 @@
 /*   By: gode-jes <gode-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:58:47 by gode-jes          #+#    #+#             */
-/*   Updated: 2023/01/19 16:25:21 by gode-jes         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:17:14 by gode-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,30 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(str, s1, size_s1 + 1);
 	ft_strlcpy(str + size_s1, s2, size_s2 + 1);
+	free(s1);
 	return (str);
 }
 
-int	update_stack(char *str)
+int	update_buffer(char *str)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (str[i] != '\n' && str[i] != '\0')
-		i++;
-	if (str[i] == '\n')
+	while (str[i])
 	{
-		j = i;
-		while (str[j] != '\0')
+		if (str[i] == '\n')
 		{
-			str[j - i] = str[j + 1];
-			j++;
+			j = i;
+			while (str[j] != '\0')
+			{
+				str[j - i] = str[j + 1];
+				j++;
+			}
+			return (1);
 		}
-		return (1);
+		str[i] = '\0';
+		i++;
 	}
 	return (0);
 }

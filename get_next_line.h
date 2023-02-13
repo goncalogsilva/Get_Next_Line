@@ -6,7 +6,7 @@
 /*   By: gode-jes <gode-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:53:07 by gode-jes          #+#    #+#             */
-/*   Updated: 2023/01/19 16:05:40 by gode-jes         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:17:51 by gode-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 char	*ft_strjoin(char *s1, char *s2);
-int		update_stack(char *str);
-char	*ft_strdup(char *s);
+int		update_buffer(char *str);
 #endif
